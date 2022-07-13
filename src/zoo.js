@@ -14,12 +14,11 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   return ids === 'undefined' ? [] : species.filter((element) => ids.includes(element.id));
 }
-console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  return species.filter((element) => element.name === animal).every((element) => element.residents.every((specie) => specie.age > age));
 }
-
+console.log(getAnimalsOlderThan('tigers', 2));
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
@@ -36,7 +35,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals() {
   // seu código aqui
 }
 
