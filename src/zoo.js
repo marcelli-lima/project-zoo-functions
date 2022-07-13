@@ -25,7 +25,14 @@ function getEmployeeByName(employeeName) {
 console.log(getEmployeeByName('Nelson'));
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const employee = {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
+  return employee;
 }
 
 function isManager(id) {
