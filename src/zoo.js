@@ -109,19 +109,36 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   const specie = employees.find((ids) => ids.id === id).responsibleFor[0];
-  const resul = species.find((element) => element.id === specie);
-  const animalOld = resul.residents.sort((a, b) => b.age - a.age)[0];
+  const resul = species.find((element) => element.id === specie).residents;
+  const animalOld = resul.sort((a, b) => b.age - a.age)[0];
   return [animalOld.name, animalOld.sex, animalOld.age];
 }
 console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = (Math.round((prices.Adult * (1 + percentage / 100)) * 100) / 100);
+  prices.Senior = Math.round(prices.Senior * (1 + percentage / 100) * 100) / 100;
+  prices.Child = Math.round(prices.Child * (1 + percentage / 100) * 100) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const obj = {};
+  const reducer = employees.reduce((acc, cv) => {
+    const name = `${cv.firstName} ${cv.lastName}`;
+    acc[name] = [];
+    cv.responsibleFor.forEach((animalId) => {
+      acc[name].push((species.find((specie) => animalId === specie.id).name));
+    });
+
+    if (cv.firstName === idOrName || cv.id === idOrName || cv.lastName === idOrName) {
+      obj[name] = acc[name];
+    }
+    return acc;
+  }, {});
+
+  return (idOrName === undefined) ? reducer : obj;
 }
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
