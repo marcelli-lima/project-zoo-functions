@@ -69,26 +69,15 @@ function calculateEntry(entrants) {
 // console.log(calculateEntry({ Adult: 1 }));
 
 function getAnimalMap(options) {
-  // const { includeNames = false, sorted = false, sex = '' } = options;
-  // if (options === undefined) {
-  //   return {
-  //     NE: species.filter((spe) => spe.location === 'NE').map((e) => e.name),
-  //     NW: species.filter((spe) => spe.location === 'NW').map((e) => e.name),
-  //     SE: species.filter((spe) => spe.location === 'SE').map((e) => e.name),
-  //     SW: species.filter((spe) => spe.location === 'SW').map((e) => e.name),
-  //   };
-  // } if (includeNames) {
-  //   return {
-  //     NE: species.filter((spe) => spe.location === 'NE').map((e) => e.residents).map((animal) => animal.name),
-  //     NW: species.filter((spe) => spe.location === 'NW').map((e) => e.residents),
-  //     SE: species.filter((spe) => spe.location === 'SE').map((e) => e.residents),
-  //     SW: species.filter((spe) => spe.location === 'SW').map((e) => e.residents),
-  //   };
-  // }
+  const local = {
+    NE: species.filter((spe) => spe.location === 'NE').map((e) => e.name),
+    NW: species.filter((spe) => spe.location === 'NW').map((e) => e.name),
+    SE: species.filter((spe) => spe.location === 'SE').map((e) => e.name),
+    SW: species.filter((spe) => spe.location === 'SW').map((e) => e.name),
+  };
+  if (options === undefined) return local;
 }
-// const test = species.filter((spe) => spe.location === 'NE').map((e) => e.residents);
-// console.log(test);
-// console.log(getAnimalMap());
+console.log(getAnimalMap());
 
 function getSchedule(dayName) {
   const schedule = {};
@@ -113,7 +102,7 @@ function getOldestFromFirstSpecies(id) {
   const animalOld = resul.sort((a, b) => b.age - a.age)[0];
   return [animalOld.name, animalOld.sex, animalOld.age];
 }
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   prices.Adult = (Math.round((prices.Adult * (1 + percentage / 100)) * 100) / 100);
@@ -138,7 +127,7 @@ function getEmployeeCoverage(idOrName) {
 
   return (idOrName === undefined) ? reducer : obj;
 }
-console.log(getEmployeeCoverage());
+console.log(getEmployeeCoverage('Stephanie'));
 
 module.exports = {
   calculateEntry,
